@@ -1,0 +1,82 @@
+name: CI Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  install-pip-deps:
+    name: Install pip deps
+    runs-on: self-hosted
+
+    steps:
+      - name: ... dummy code ...
+        run: echo ... dummy code ... 
+
+  deploy-to-dev:
+    name: Deploy to dev
+    runs-on: self-hosted
+
+    steps:
+      - name: ... dummy code ...
+        run: echo ... dummy code ...  
+
+  tests-on-dev:
+    name: Tests on dev
+    runs-on: self-hosted
+
+    steps:
+      - name: ... dummy code ...
+        run: echo ... dummy code ...  
+
+  deploy-to-staging:
+    name: Deploy to staging
+    runs-on: self-hosted
+
+    steps:
+      - name: ... dummy code ...
+        run: echo ... dummy code ...  
+
+  tests-on-staging:
+    name: Tests on staging
+    runs-on: self-hosted
+
+    steps:
+      - name: ... dummy code ...
+        run: echo ... dummy code ...  
+
+  deploy-to-preprod:
+    name: Deploy to preprod
+    runs-on: self-hosted
+
+    steps:
+      - name: ... dummy code ...
+        run: echo ... dummy code ...  
+
+  tests-on-preprod:
+    name: Tests on prepod
+    runs-on: self-hosted
+
+    steps:
+      - name: ... dummy code ...
+        run: echo ... dummy code ...  
+
+  deploy-to-prod:
+    name: Deploy to prod
+    runs-on: self-hosted
+
+    steps:
+      - name: ... dummy code ...
+        run: echo ... dummy code ...  
+
+  tests-on-prod:
+    name: Tests on prod
+    runs-on: self-hosted
+
+    steps:
+      - name: ... dummy code ...
+        run: echo ... dummy code ... 
