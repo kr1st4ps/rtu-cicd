@@ -20,7 +20,7 @@ jobs:
   deploy-to-dev:
     name: Deploy to dev
     runs-on: self-hosted
-
+    needs: install-pip-deps
     steps:
       - name: ... dummy code ...
         run: echo ... dummy code ...  
@@ -28,7 +28,7 @@ jobs:
   tests-on-dev:
     name: Tests on dev
     runs-on: self-hosted
-
+    needs: deploy-to-dev
     steps:
       - name: ... dummy code ...
         run: echo ... dummy code ...  
@@ -36,7 +36,7 @@ jobs:
   deploy-to-staging:
     name: Deploy to staging
     runs-on: self-hosted
-
+    needs: tests-on-dev
     steps:
       - name: ... dummy code ...
         run: echo ... dummy code ...  
@@ -44,7 +44,7 @@ jobs:
   tests-on-staging:
     name: Tests on staging
     runs-on: self-hosted
-
+    needs: deploy-to-staging
     steps:
       - name: ... dummy code ...
         run: echo ... dummy code ...  
@@ -52,7 +52,7 @@ jobs:
   deploy-to-preprod:
     name: Deploy to preprod
     runs-on: self-hosted
-
+    needs: tests-on-staging
     steps:
       - name: ... dummy code ...
         run: echo ... dummy code ...  
@@ -60,7 +60,7 @@ jobs:
   tests-on-preprod:
     name: Tests on prepod
     runs-on: self-hosted
-
+    needs: deploy-to-preprod
     steps:
       - name: ... dummy code ...
         run: echo ... dummy code ...  
@@ -68,7 +68,7 @@ jobs:
   deploy-to-prod:
     name: Deploy to prod
     runs-on: self-hosted
-
+    needs: tests-on-preprod
     steps:
       - name: ... dummy code ...
         run: echo ... dummy code ...  
@@ -76,7 +76,7 @@ jobs:
   tests-on-prod:
     name: Tests on prod
     runs-on: self-hosted
-
+    needs: deploy-to-prod
     steps:
       - name: ... dummy code ...
-        run: echo ... dummy code ... 
+        run: echo ... dummy code ...
