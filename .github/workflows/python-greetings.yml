@@ -5,78 +5,76 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
   workflow_dispatch:
 
 jobs:
   install-pip-deps:
     name: Install pip deps
     runs-on: self-hosted
-
     steps:
-      - name: ... dummy code ...
-        run: echo ... dummy code ... 
+      - name: Install dependencies
+        run: echo "Installing all required dependencies.."
 
   deploy-to-dev:
     name: Deploy to dev
     runs-on: self-hosted
     needs: install-pip-deps
     steps:
-      - name: ... dummy code ...
-        run: echo ... dummy code ...  
+      - name: Deploying to development environment
+        run: echo "Deploying to development environment.."
 
   tests-on-dev:
     name: Tests on dev
     runs-on: self-hosted
     needs: deploy-to-dev
     steps:
-      - name: ... dummy code ...
-        run: echo ... dummy code ...  
+      - name: Running tests on development environment
+        run: echo "Running tests on development environment.."
 
   deploy-to-staging:
     name: Deploy to staging
     runs-on: self-hosted
     needs: tests-on-dev
     steps:
-      - name: ... dummy code ...
-        run: echo ... dummy code ...  
+      - name: Deploying to staging environment
+        run: echo "Deploying to staging environment.."
 
   tests-on-staging:
     name: Tests on staging
     runs-on: self-hosted
     needs: deploy-to-staging
     steps:
-      - name: ... dummy code ...
-        run: echo ... dummy code ...  
+      - name: Running tests on staging environment
+        run: echo "Running tests on staging environment.."
 
   deploy-to-preprod:
     name: Deploy to preprod
     runs-on: self-hosted
     needs: tests-on-staging
     steps:
-      - name: ... dummy code ...
-        run: echo ... dummy code ...  
+      - name: Deploying to pre-production environment
+        run: echo "Deploying to pre-production environment.."
 
   tests-on-preprod:
-    name: Tests on prepod
+    name: Tests on preprod
     runs-on: self-hosted
     needs: deploy-to-preprod
     steps:
-      - name: ... dummy code ...
-        run: echo ... dummy code ...  
+      - name: Running tests on pre-production environment
+        run: echo "Running tests on pre-production environment.."
 
   deploy-to-prod:
     name: Deploy to prod
     runs-on: self-hosted
     needs: tests-on-preprod
     steps:
-      - name: ... dummy code ...
-        run: echo ... dummy code ...  
+      - name: Deploying to production environment
+        run: echo "Deploying to production environment.."
 
   tests-on-prod:
     name: Tests on prod
     runs-on: self-hosted
     needs: deploy-to-prod
     steps:
-      - name: ... dummy code ...
-        run: echo ... dummy code ...
+      - name: Running tests on production environment
+        run: echo "Running tests on production environment.."
