@@ -42,7 +42,7 @@ jobs:
       - run: pm2 delete greetings-app-dev || true
 
       - run: echo "Dev servisa uzsaksana"
-      - run: pm2 start python-greetings-dev/app.py --name greetings-app-dev -- --port 7001
+      - run: pm2 start app.py --name greetings-app-dev -- --port 7001
         working-directory: python-greetings-dev
 
   tests-on-dev:
