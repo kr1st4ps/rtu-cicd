@@ -64,6 +64,7 @@ jobs:
 
       - run: echo "dev testu izpilde"
       - run: npm run
+        working-directory: course-js-api-framework-dev
       - run: npm run greetings greetings_dev
         working-directory: course-js-api-framework-dev
 
