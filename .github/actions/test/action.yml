@@ -1,0 +1,27 @@
+inputs:
+  enviroment:
+    description: 'Enviroment for node aplication'
+    default: 'DEV'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3.5.2
+
+    - run: echo "course-js-api-framework repozitorija klonesana"
+      shell: bash
+    - uses: actions/checkout@v3.5.2
+      with:
+        repository: mtararujs/course-js-api-framework
+        path: course-js-api-framework-${{ inputs.enviroment }}
+
+    - run: echo "Biblioteku instalacija"
+      shell: bash
+    - run: npm install
+      working-directory: course-js-api-framework-${{ inputs.enviroment }}
+      shell: bash
+
+    - run: echo "${{ inputs.enviroment }} testu izpilde"
+      shell: bash
+    - run: npm run greetings greetings_${{ inputs.enviroment }}
+      working-directory: course-js-api-framework-${{ inputs.enviroment }}
+      shell: bash

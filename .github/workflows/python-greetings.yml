@@ -47,22 +47,9 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3.5.2
-
-      - run: echo "course-js-api-framework repozitorija klonesana"
-      - uses: actions/checkout@v3.5.2
+      - uses: ./.github/actions/test
         with:
-          repository: mtararujs/course-js-api-framework
-          path: course-js-api-framework-dev
-
-      - run: echo "Biblioteku instalacija"
-      - run: npm install
-        working-directory: course-js-api-framework-dev
-
-      - run: echo "dev testu izpilde"
-      - run: npm run
-        working-directory: course-js-api-framework-dev
-      - run: npm run greetings greetings_dev
-        working-directory: course-js-api-framework-dev
+          enviroment: 'dev'
 
   deploy-to-staging:
     name: Deploy to staging
@@ -71,21 +58,10 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3.5.2
-
-      - run: echo "python-greetings repozitorija klonesana"
-      - uses: actions/checkout@v3.5.2
+      - uses: ./.github/actions/deploy
         with:
-          repository: mtararujs/python-greetings
-          path: python-greetings-staging
-          ref: 4e911440a9886c7c26ccbb4eb55f0bc2a5067b51
-          fetch-depth: 0
-
-      - run: echo "staging servisa apstadinasana"
-      - run: pm2 delete greetings-app-staging || true
-
-      - run: echo "staging servisa uzsaksana"
-      - run: pm2 start app.py --name greetings-app-staging -- --port 7002
-        working-directory: python-greetings-staging
+          port: 7002
+          enviroment: 'staging'
 
   tests-on-staging:
     name: Tests on staging
@@ -94,20 +70,9 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3.5.2
-
-      - run: echo "course-js-api-framework repozitorija klonesana"
-      - uses: actions/checkout@v3.5.2
+      - uses: ./.github/actions/test
         with:
-          repository: mtararujs/course-js-api-framework
-          path: course-js-api-framework-staging
-
-      - run: echo "Biblioteku instalacija"
-      - run: npm install
-        working-directory: course-js-api-framework-staging
-
-      - run: echo "staging testu izpilde"
-      - run: npm run greetings greetings_staging
-        working-directory: course-js-api-framework-staging
+          enviroment: 'dev'
 
   deploy-to-preprod:
     name: Deploy to preprod
@@ -116,21 +81,10 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3.5.2
-
-      - run: echo "python-greetings repozitorija klonesana"
-      - uses: actions/checkout@v3.5.2
+      - uses: ./.github/actions/deploy
         with:
-          repository: mtararujs/python-greetings
-          path: python-greetings-preprod
-          ref: 4e911440a9886c7c26ccbb4eb55f0bc2a5067b51
-          fetch-depth: 0
-
-      - run: echo "preprod servisa apstadinasana"
-      - run: pm2 delete greetings-app-preprod || true
-
-      - run: echo "preprod servisa uzsaksana"
-      - run: pm2 start app.py --name greetings-app-preprod -- --port 7003
-        working-directory: python-greetings-preprod
+          port: 7003
+          enviroment: 'preprod'
 
   tests-on-preprod:
     name: Tests on preprod
@@ -139,20 +93,9 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3.5.2
-
-      - run: echo "course-js-api-framework repozitorija klonesana"
-      - uses: actions/checkout@v3.5.2
+      - uses: ./.github/actions/test
         with:
-          repository: mtararujs/course-js-api-framework
-          path: course-js-api-framework-preprod
-
-      - run: echo "Biblioteku instalacija"
-      - run: npm install
-        working-directory: course-js-api-framework-preprod
-
-      - run: echo "preprod testu izpilde"
-      - run: npm run greetings greetings_preprod
-        working-directory: course-js-api-framework-preprod
+          enviroment: 'dev'
 
   deploy-to-prod:
     name: Deploy to prod
@@ -161,21 +104,10 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3.5.2
-
-      - run: echo "python-greetings repozitorija klonesana"
-      - uses: actions/checkout@v3.5.2
+      - uses: ./.github/actions/deploy
         with:
-          repository: mtararujs/python-greetings
-          path: python-greetings-prod
-          ref: 4e911440a9886c7c26ccbb4eb55f0bc2a5067b51
-          fetch-depth: 0
-
-      - run: echo "prod servisa apstadinasana"
-      - run: pm2 delete greetings-app-prod || true
-
-      - run: echo "prod servisa uzsaksana"
-      - run: pm2 start app.py --name greetings-app-prod -- --port 7004
-        working-directory: python-greetings-prod
+          port: 7004
+          enviroment: 'prod'
 
   tests-on-prod:
     name: Tests on prod
@@ -184,17 +116,6 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3.5.2
-
-      - run: echo "course-js-api-framework repozitorija klonesana"
-      - uses: actions/checkout@v3.5.2
+      - uses: ./.github/actions/test
         with:
-          repository: mtararujs/course-js-api-framework
-          path: course-js-api-framework-prod
-
-      - run: echo "Biblioteku instalacija"
-      - run: npm install
-        working-directory: course-js-api-framework-prod
-
-      - run: echo "prod testu izpilde"
-      - run: npm run greetings greetings_prod
-        working-directory: course-js-api-framework-prod
+          enviroment: 'dev'
