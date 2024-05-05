@@ -11,6 +11,7 @@ runs:
     - uses: actions/checkout@v3.5.2
 
     - run: echo "python-greetings repozitorija klonesana"
+      shell: bash
     - uses: actions/checkout@v3.5.2
       with:
         repository: mtararujs/python-greetings
@@ -19,8 +20,12 @@ runs:
         fetch-depth: 0
 
     - run: echo "${{ inputs.enviroment }} servisa apstadinasana"
+      shell: bash
     - run: pm2 delete greetings-app-${{ inputs.enviroment }} || true
+      shell: bash
 
     - run: echo "${{ inputs.enviroment }} servisa uzsaksana"
+      shell: bash
     - run: pm2 start app.py --name greetings-app-${{ inputs.enviroment }} -- --port ${{ inputs.port }}
       working-directory: python-greetings-${{ inputs.enviroment }}
+      shell: bash
