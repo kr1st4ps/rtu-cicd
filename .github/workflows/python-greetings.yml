@@ -35,21 +35,10 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3.5.2
-
-      - run: echo "python-greetings repozitorija klonesana"
-      - uses: actions/checkout@v3.5.2
+      - uses: ./.github/actions/deploy
         with:
-          repository: mtararujs/python-greetings
-          path: python-greetings-dev
-          ref: 4e911440a9886c7c26ccbb4eb55f0bc2a5067b51
-          fetch-depth: 0
-
-      - run: echo "Dev servisa apstadinasana"
-      - run: pm2 delete greetings-app-dev || true
-
-      - run: echo "Dev servisa uzsaksana"
-      - run: pm2 start app.py --name greetings-app-dev -- --port 7001
-        working-directory: python-greetings-dev
+          port: 7001
+          enviroment: 'dev'
 
   tests-on-dev:
     name: Tests on dev

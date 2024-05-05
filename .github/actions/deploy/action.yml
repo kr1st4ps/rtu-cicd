@@ -1,0 +1,26 @@
+inputs:
+  port:
+    description: 'Port for node application to run'
+    default: 1010
+  enviroment:
+    description: 'Enviroment for node aplication'
+    default: 'DEV'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3.5.2
+
+    - run: echo "python-greetings repozitorija klonesana"
+    - uses: actions/checkout@v3.5.2
+      with:
+        repository: mtararujs/python-greetings
+        path: python-greetings-${{ inputs.enviroment }}
+        ref: 4e911440a9886c7c26ccbb4eb55f0bc2a5067b51
+        fetch-depth: 0
+
+    - run: echo "${{ inputs.enviroment }} servisa apstadinasana"
+    - run: pm2 delete greetings-app-${{ inputs.enviroment }} || true
+
+    - run: echo "${{ inputs.enviroment }} servisa uzsaksana"
+    - run: pm2 start app.py --name greetings-app-${{ inputs.enviroment }} -- --port ${{ inputs.port }}
+      working-directory: python-greetings-${{ inputs.enviroment }}
