@@ -12,69 +12,179 @@ jobs:
     name: Install pip deps
     runs-on: self-hosted
     steps:
-      - name: Install dependencies
-        run: echo "Installing all required dependencies.."
+      - uses: actions/checkout@v3.5.2
+
+      - run: echo "python-greetings repozitorija klonesana"
+
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/python-greetings
+          path: python-greetings
+
+      - run: echo "Requirments instalesana..."
+
+      - run: cd python-greetings; pip3.9 install -r requirements.txt
 
   deploy-to-dev:
     name: Deploy to dev
     runs-on: self-hosted
     needs: install-pip-deps
     steps:
-      - name: Deploying to development environment
-        run: echo "Deploying to development environment.."
+      - uses: actions/checkout@v3.5.2
+
+      - run: echo "python-greetings repozitorija klonesana"
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/python-greetings
+          path: python-greetings-dev
+
+      - run: echo "Dev servisa apstadinasana"
+      - run: pm2 delete greetings-app-dev || true
+
+      - run: echo "Dev servisa uzsaksana"
+      - run: pm2 start app.py --name greetings-app-dev -- --port 7001
+        working-directory: python-greetings-dev
 
   tests-on-dev:
     name: Tests on dev
     runs-on: self-hosted
     needs: deploy-to-dev
     steps:
-      - name: Running tests on development environment
-        run: echo "Running tests on development environment.."
+      - uses: actions/checkout@v3.5.2
+
+      - run: echo "course-js-api-framework repozitorija klonesana"
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/course-js-api-framework
+          path: course-js-api-framework-dev
+
+      - run: echo "Biblioteku instalacija"
+      - run: npm install
+        working-directory: course-js-api-framework-dev
+
+      - run: echo "dev testu izpilde"
+      - run: npm run greetings greetings_dev
+        working-directory: course-js-api-framework-dev
 
   deploy-to-staging:
     name: Deploy to staging
     runs-on: self-hosted
     needs: tests-on-dev
     steps:
-      - name: Deploying to staging environment
-        run: echo "Deploying to staging environment.."
+      - uses: actions/checkout@v3.5.2
+
+      - run: echo "python-greetings repozitorija klonesana"
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/python-greetings
+          path: python-greetings-staging
+
+      - run: echo "staging servisa apstadinasana"
+      - run: pm2 delete greetings-app-staging || true
+
+      - run: echo "staging servisa uzsaksana"
+      - run: pm2 start app.py --name greetings-app-staging -- --port 7002
+        working-directory: python-greetings-staging
 
   tests-on-staging:
     name: Tests on staging
     runs-on: self-hosted
     needs: deploy-to-staging
     steps:
-      - name: Running tests on staging environment
-        run: echo "Running tests on staging environment.."
+      - uses: actions/checkout@v3.5.2
+
+      - run: echo "course-js-api-framework repozitorija klonesana"
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/course-js-api-framework
+          path: course-js-api-framework-staging
+
+      - run: echo "Biblioteku instalacija"
+      - run: npm install
+        working-directory: course-js-api-framework-staging
+
+      - run: echo "staging testu izpilde"
+      - run: npm run greetings greetings_staging
+        working-directory: course-js-api-framework-staging
 
   deploy-to-preprod:
     name: Deploy to preprod
     runs-on: self-hosted
     needs: tests-on-staging
     steps:
-      - name: Deploying to pre-production environment
-        run: echo "Deploying to pre-production environment.."
+      - uses: actions/checkout@v3.5.2
+
+      - run: echo "python-greetings repozitorija klonesana"
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/python-greetings
+          path: python-greetings-preprod
+
+      - run: echo "preprod servisa apstadinasana"
+      - run: pm2 delete greetings-app-preprod || true
+
+      - run: echo "preprod servisa uzsaksana"
+      - run: pm2 start app.py --name greetings-app-preprod -- --port 7003
+        working-directory: python-greetings-preprod
 
   tests-on-preprod:
     name: Tests on preprod
     runs-on: self-hosted
     needs: deploy-to-preprod
     steps:
-      - name: Running tests on pre-production environment
-        run: echo "Running tests on pre-production environment.."
+      - uses: actions/checkout@v3.5.2
+
+      - run: echo "course-js-api-framework repozitorija klonesana"
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/course-js-api-framework
+          path: course-js-api-framework-preprod
+
+      - run: echo "Biblioteku instalacija"
+      - run: npm install
+        working-directory: course-js-api-framework-preprod
+
+      - run: echo "preprod testu izpilde"
+      - run: npm run greetings greetings_preprod
+        working-directory: course-js-api-framework-preprod
 
   deploy-to-prod:
     name: Deploy to prod
     runs-on: self-hosted
     needs: tests-on-preprod
     steps:
-      - name: Deploying to production environment
-        run: echo "Deploying to production environment.."
+      - uses: actions/checkout@v3.5.2
+
+      - run: echo "python-greetings repozitorija klonesana"
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/python-greetings
+          path: python-greetings-prod
+
+      - run: echo "prod servisa apstadinasana"
+      - run: pm2 delete greetings-app-prod || true
+
+      - run: echo "prod servisa uzsaksana"
+      - run: pm2 start app.py --name greetings-app-prod -- --port 7004
+        working-directory: python-greetings-prod
 
   tests-on-prod:
     name: Tests on prod
     runs-on: self-hosted
     needs: deploy-to-prod
     steps:
-      - name: Running tests on production environment
-        run: echo "Running tests on production environment.."
+      - uses: actions/checkout@v3.5.2
+
+      - run: echo "course-js-api-framework repozitorija klonesana"
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: mtararujs/course-js-api-framework
+          path: course-js-api-framework-prod
+
+      - run: echo "Biblioteku instalacija"
+      - run: npm install
+        working-directory: course-js-api-framework-prod
+
+      - run: echo "prod testu izpilde"
+      - run: npm run greetings greetings_prod
+        working-directory: course-js-api-framework-prod
